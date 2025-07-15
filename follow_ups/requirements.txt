@@ -1,0 +1,13 @@
+faster-whisper
+langchain
+langchain-core
+langchain-community
+edge-tts
+openai
+soundfile
+aiofiles
+ffmpeg-python
+python-dotenv
+langgraph
+pydub
+langchain_google_genai
