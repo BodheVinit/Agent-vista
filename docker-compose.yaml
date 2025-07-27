@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis_server
+    ports:
+      - "6379:6379" 
+    volumes:
+      - redis_data:/data
+
+  mongo:
+    image: mongo:7
+    container_name: mongo_server
+    ports:
+      - "27017:27017" 
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  redis_data:
+  mongo_data:
