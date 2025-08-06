@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from app.services.followup_generator import generate_followup
 from app.services.backend_integration import send_to_backend
 
-router = APIRouter()
+router = APIRouter(tags=["Flow Controller"])
 
 class UserResponse(BaseModel):
     question_id: str
@@ -12,11 +12,14 @@ class UserResponse(BaseModel):
 class InterviewQuestion(BaseModel):
     question: str
 
-@router.post("/interview", response_model=InterviewQuestion)
+@router.post("/interview", response_model=InterviewQuestion , summary="Generate follow-up question")
 async def interview_flow(user_response: UserResponse):
     """
-    Orchestrates the interview flow between Member 4 (follow-up generator)
-    and Member 6 (backend integration).
+    Orchestrates the interview flow:
+    1.Take the user's answer.
+    2.Uses Member 4's follow-up generator.
+    3.Sends to Member 6's backend.
+    4.Returns next question to frontend.
     """
     try:
         # 1. Get follow-up question from Member 4
